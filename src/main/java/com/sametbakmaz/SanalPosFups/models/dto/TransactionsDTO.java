@@ -1,12 +1,10 @@
 package com.sametbakmaz.SanalPosFups.models.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class TransactionsDTO {
-    @JsonIgnore
+
     private Long id;
     private BigDecimal amount;
     private LocalDate transactionDate;
