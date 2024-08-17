@@ -1,6 +1,8 @@
 package com.sametbakmaz.SanalPosFups.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BanksDTO {
 
     private Long id;

@@ -1,5 +1,8 @@
 package com.sametbakmaz.SanalPosFups.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QueryResponse<T> {
     private String status;
     private String message;
