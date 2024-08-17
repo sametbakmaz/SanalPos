@@ -1,4 +1,4 @@
-package com.sametbakmaz.SanalPosFups.services.Transactions;
+package com.sametbakmaz.SanalPosFups.services.transactions;
 
 import com.sametbakmaz.SanalPosFups.mappers.TransactionsMapper;
 import com.sametbakmaz.SanalPosFups.models.dto.TransactionsDTO;

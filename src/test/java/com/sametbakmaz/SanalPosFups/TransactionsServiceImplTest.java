@@ -7,7 +7,7 @@ import com.sametbakmaz.SanalPosFups.models.entity.TransactionsEntity;
 import com.sametbakmaz.SanalPosFups.repositories.BanksRepository;
 import com.sametbakmaz.SanalPosFups.repositories.CommissionsRepository;
 import com.sametbakmaz.SanalPosFups.repositories.TransactionsRepository;
-import com.sametbakmaz.SanalPosFups.services.Transactions.TransactionsServiceImpl;
+import com.sametbakmaz.SanalPosFups.services.transactions.TransactionsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

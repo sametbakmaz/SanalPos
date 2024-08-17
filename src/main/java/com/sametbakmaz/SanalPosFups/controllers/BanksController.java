@@ -19,14 +19,12 @@ public class BanksController {
     public BanksController(BankService bankService) {
         this.bankService = bankService;
     }
-
     @PostMapping(value = "/save")
     public ResponseEntity<QueryResponse<BanksDTO>> save(@RequestBody BanksDTO banksDTO) {
         BanksDTO createdBanks = bankService.save(banksDTO);
         QueryResponse<BanksDTO> queryResponse = QueryResponse.createResponse(createdBanks != null, createdBanks,"Kayıt Başarılı");
         return ResponseEntity.status(HttpStatus.CREATED).body(queryResponse);
     }
-
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<QueryResponse<BanksDTO>> update(@PathVariable Long id, @RequestBody BanksDTO banksDTO) {
         BanksDTO updatedBanks = bankService.update(id, banksDTO);
@@ -34,7 +32,6 @@ public class BanksController {
                 updatedBanks != null, updatedBanks, "Güncelleme Başarılı");
         return ResponseEntity.status(HttpStatus.OK).body(queryResponse);
     }
-
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<QueryResponse<Void>> delete(@PathVariable Long id) {
         bankService.delete(id);
@@ -42,7 +39,6 @@ public class BanksController {
                 true, null, "Silme İşlemi Başarılı");
         return ResponseEntity.status(HttpStatus.OK).body(queryResponse);
     }
-
     @GetMapping(value = "/list")
     public ResponseEntity<QueryResponse<List<BanksDTO>>> list() {
         List<BanksDTO> banksList = bankService.list();

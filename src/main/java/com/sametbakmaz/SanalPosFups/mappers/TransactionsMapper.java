@@ -8,7 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface TransactionsMapper {
     TransactionsMapper INSTANCE = Mappers.getMapper(TransactionsMapper.class);
-
     TransactionsEntity toEntity(TransactionsDTO transactionsDTO);
     TransactionsDTO toDto(TransactionsEntity transactionsEntity);
 }

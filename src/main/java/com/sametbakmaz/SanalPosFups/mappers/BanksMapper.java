@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper
 public interface BanksMapper {
     BanksMapper INSTANCE = Mappers.getMapper(BanksMapper.class);
-
     BanksEntity toEntity(BanksDTO banksDTO);
     BanksDTO toDto(BanksEntity banksEntity);
     List<BanksEntity> toEntityList(List<BanksDTO> banksDTOList);

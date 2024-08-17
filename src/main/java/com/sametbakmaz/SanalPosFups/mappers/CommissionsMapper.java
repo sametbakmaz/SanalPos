@@ -13,7 +13,6 @@ import java.util.List;
 public interface CommissionsMapper {
 
     CommissionsMapper INSTANCE = Mappers.getMapper(CommissionsMapper.class);
-
     CommissionsEntity toEntity(CommissionsDTO commissionsDTO);
     CommissionsDTO toDto(CommissionsEntity commissionsEntity);
     List<CommissionsEntity> toEntityList(List<CommissionsDTO> commissionsDTOList);

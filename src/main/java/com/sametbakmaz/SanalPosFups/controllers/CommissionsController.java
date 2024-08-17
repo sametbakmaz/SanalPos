@@ -21,7 +21,6 @@ public class CommissionsController {
     public CommissionsController(CommissionsService commissionsService) {
         this.commissionsService = commissionsService;
     }
-
     @PostMapping("/save/{fkBankId}")
     public ResponseEntity<QueryResponse<CommissionsDTO>> save(@PathVariable Long fkBankId, @RequestBody CommissionsDTO commissionsDTO) {
         // Path parametresinden gelen fkBankId'yi DTO'ya set ediyoruz
@@ -32,7 +31,6 @@ public class CommissionsController {
                 savedCommission != null, savedCommission, "Komisyon kaydı başarıyla oluşturuldu");
         return ResponseEntity.status(HttpStatus.CREATED).body(queryResponse);
     }
-
     @PutMapping("/update/{fkBankId}")
     public ResponseEntity<QueryResponse<CommissionsDTO>> update(@PathVariable Long fkBankId, @RequestBody CommissionsDTO commissionsDTO) {
         CommissionsDTO updatedCommission = commissionsService.update(fkBankId, commissionsDTO);
@@ -40,8 +38,6 @@ public class CommissionsController {
                 updatedCommission != null, updatedCommission, "Komisyon kaydı başarıyla güncellendi");
         return ResponseEntity.status(HttpStatus.OK).body(queryResponse);
     }
-
-
     @DeleteMapping("/delete/{fkBankId}")
     public ResponseEntity<QueryResponse<Void>> delete(@PathVariable Long fkBankId) {
         commissionsService.delete(fkBankId);
@@ -49,7 +45,6 @@ public class CommissionsController {
                 true, null, "Komisyon kaydı başarıyla silindi");
         return ResponseEntity.status(HttpStatus.OK).body(queryResponse);
     }
-
     @GetMapping("/list")
     public ResponseEntity<QueryResponse<List<CommissionsDTO>>> list() {
         List<CommissionsDTO> commissionsList = commissionsService.list();

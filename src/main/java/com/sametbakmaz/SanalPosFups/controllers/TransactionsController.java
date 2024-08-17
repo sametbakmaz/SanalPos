@@ -2,7 +2,7 @@ package com.sametbakmaz.SanalPosFups.controllers;
 
 import com.sametbakmaz.SanalPosFups.common.QueryResponse;
 import com.sametbakmaz.SanalPosFups.models.dto.TransactionsDTO;
-import com.sametbakmaz.SanalPosFups.services.Transactions.TransactionsService;
+import com.sametbakmaz.SanalPosFups.services.transactions.TransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

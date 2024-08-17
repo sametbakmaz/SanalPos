@@ -11,7 +11,6 @@ public enum ErrorCodeEnum {
     ErrorCodeEnum(int code) {
         this.code = code;
     }
-
     public int getCode() {
         return code;
     }
