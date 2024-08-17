@@ -1,10 +1,12 @@
 package com.sametbakmaz.SanalPosFups.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CommissionsDTO {
-
+    @JsonIgnore
     private Long id;
     private BigDecimal rate;
     private LocalDate startDate;

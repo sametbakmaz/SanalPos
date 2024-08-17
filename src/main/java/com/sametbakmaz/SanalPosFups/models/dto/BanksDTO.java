@@ -1,8 +1,10 @@
 package com.sametbakmaz.SanalPosFups.models.dto;
 
 
-public class BanksDTO {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+public class BanksDTO {
+    @JsonIgnore
     private Long id;
     private String name;
 

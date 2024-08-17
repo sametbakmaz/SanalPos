@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
@@ -32,5 +33,14 @@ public class TransactionsController {
                 result != null, result, "İşlem başarıyla gerçekleştirildi"
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(queryResponse);
+    }
+    @PostMapping("/calculate-commissions")
+    public ResponseEntity<QueryResponse<List<TransactionsDTO>>> calculateCommissions(@RequestParam BigDecimal amount) {
+        List<TransactionsDTO> result = transactionsService.calculateCommissions(amount);
+
+        QueryResponse<List<TransactionsDTO>> queryResponse = QueryResponse.createResponse(
+                !result.isEmpty(), result, result.isEmpty() ? "Komisyon oranı bulunamadı" : "Komisyonlar başarıyla hesaplandı"
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(queryResponse);
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,8 +41,8 @@ public class TransactionsServiceImpl implements TransactionsService {
         TransactionsEntity transactionEntity = calculateRateAndSaveTransaction(transactionsDTO.getAmount());
         return toDto(transactionEntity);
     }
-
-    private TransactionsEntity calculateRateAndSaveTransaction(BigDecimal amount) {
+    @Override
+    public TransactionsEntity calculateRateAndSaveTransaction(BigDecimal amount) {
         LocalDate today = LocalDate.now();
 
         Iterable<BanksEntity> banks = banksRepository.findAll();
@@ -86,8 +87,8 @@ public class TransactionsServiceImpl implements TransactionsService {
             throw new InvalidParameterException("Geçerli bir komisyon oranı bulunamadı, işlem gerçekleştirilemedi.");
         }
     }
-
-    private void logProfitComparison(Iterable<BanksEntity> banks, BanksEntity selectedBank, BigDecimal amount, BigDecimal commissionAmount) {
+    @Override
+    public void logProfitComparison(Iterable<BanksEntity> banks, BanksEntity selectedBank, BigDecimal amount, BigDecimal commissionAmount) {
         for (BanksEntity bank : banks) {
             if (!bank.equals(selectedBank)) {
                 Optional<CommissionsEntity> commissionOpt = commissionsRepository.findByFkBankId(bank.getId());
@@ -106,6 +107,34 @@ public class TransactionsServiceImpl implements TransactionsService {
                 }
             }
         }
+    }
+    @Override
+    public List<TransactionsDTO> calculateCommissions(BigDecimal amount) {
+        LocalDate today = LocalDate.now();
+        List<TransactionsDTO> transactionsList = new ArrayList<>();
+
+        Iterable<BanksEntity> banks = banksRepository.findAll();
+
+        for (BanksEntity bank : banks) {
+            List<CommissionsEntity> commissions = commissionsRepository.findAllByFkBankId(bank.getId());
+
+            for (CommissionsEntity commission : commissions) {
+                if (!today.isBefore(commission.getStartDate()) && !today.isAfter(commission.getEndDate())) {
+                    BigDecimal commissionAmount = amount.multiply(commission.getRate());
+
+                    TransactionsDTO transactionsDTO = new TransactionsDTO();
+                    transactionsDTO.setAmount(amount);
+                    transactionsDTO.setTransactionDate(today);
+                    transactionsDTO.setFkBankId(bank.getId());
+                    transactionsDTO.setCommissionRate(commission.getRate());
+                    transactionsDTO.setCommissionAmount(commissionAmount);
+
+                    transactionsList.add(transactionsDTO);
+                }
+            }
+        }
+
+        return transactionsList;
     }
 
     private TransactionsDTO toDto(TransactionsEntity transactionsEntity) {
