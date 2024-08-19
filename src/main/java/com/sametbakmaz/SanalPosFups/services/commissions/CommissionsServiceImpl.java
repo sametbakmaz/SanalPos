@@ -27,19 +27,16 @@ public class CommissionsServiceImpl implements CommissionsService {
 
     @Override
     public CommissionsDTO save(Long fkBankId, CommissionsDTO commissionsDTO) {
-        // Öncelikle fkBankId'nin null olup olmadığını kontrol edelim
         if (fkBankId == null) {
             throw new InvalidParameterException("Banka ID'si (fkBankId) boş olamaz.");
         }
 
-        // fkBankId'nin Banks tablosunda mevcut olup olmadığını kontrol et
         boolean bankExists = banksRepository.existsById(fkBankId);
 
         if (!bankExists) {
             throw new InvalidParameterException("Komisyon eklenmek istenen banka mevcut değil.");
         }
 
-        // Aynı fkBankId ile daha önce bir komisyon kaydı olup olmadığını kontrol et
         boolean exists = commissionsRepository.existsByFkBankId(fkBankId);
 
         if (exists) {
