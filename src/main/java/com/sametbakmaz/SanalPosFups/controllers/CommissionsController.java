@@ -23,7 +23,6 @@ public class CommissionsController {
     }
     @PostMapping("/save/{fkBankId}")
     public ResponseEntity<QueryResponse<CommissionsDTO>> save(@PathVariable Long fkBankId, @RequestBody CommissionsDTO commissionsDTO) {
-        // Path parametresinden gelen fkBankId'yi DTO'ya set ediyoruz
         commissionsDTO.setFkBankId(fkBankId);
 
         CommissionsDTO savedCommission = commissionsService.save(fkBankId,commissionsDTO);
