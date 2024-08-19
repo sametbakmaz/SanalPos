@@ -46,9 +46,8 @@ public class CommissionsServiceImpl implements CommissionsService {
             throw new InvalidParameterException("Aynı bankId ile bir komisyon kaydı zaten mevcut.");
         }
 
-        // DTO'dan Entity'ye dönüştür ve kaydet
         CommissionsEntity commissionsEntity = toEntity(commissionsDTO);
-        commissionsEntity.setFkBankId(fkBankId); // fkBankId'yi burada set ediyoruz
+        commissionsEntity.setFkBankId(fkBankId); 
         commissionsRepository.save(commissionsEntity);
 
         return toDto(commissionsEntity);
